@@ -1,0 +1,13 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: user-service  # micro service unique ID
+eureka:
+  client:
+    register-with-eureka: true # register to eureka server
+    fetch-registry: true # Getting instances' information from eureka server
+    service-url:
+      defaultZone : http://127.0.0.1:8081/eureka #Eureka Server's address
+

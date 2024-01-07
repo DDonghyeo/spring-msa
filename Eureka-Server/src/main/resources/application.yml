@@ -1,0 +1,11 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: spring-msa  # micro service unique ID
+
+eureka:
+  client:
+    register-with-eureka: false # no register itself
+    fetch-registry: false # Getting instances' information from eureka server
