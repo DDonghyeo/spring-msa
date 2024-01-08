@@ -20,6 +20,7 @@ spring:
 #          filters:
 #            - AddRequestHeader=User-Request-Header, User Service Request
 #            - AddResponseHeader=User-Response-Header, User Service Response
+#            - CustomFilter
 #        - id: app-service
 #          uri: http://localhost:8083/
 #          predicates:
@@ -27,4 +28,4 @@ spring:
 #          filters:
 #            - AddRequestHeader=App-Request-Header, App Service Request
 #            - AddResponseHeader=App-Response-Header, App Service Response
-
+#            - CustomFilter
