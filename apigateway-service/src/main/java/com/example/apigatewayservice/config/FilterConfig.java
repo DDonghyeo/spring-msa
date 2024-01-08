@@ -13,8 +13,8 @@ public class FilterConfig {
     public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route(r -> r.path("/user/**") //Path 확인
-                        .filters(f -> f.addRequestHeader("User Request Header", "User Service Request")
-                                .addResponseHeader("User Response Header", "User Service Response")
+                        .filters(f -> f.addRequestHeader("User-Request-Header", "User Service Request")
+                                .addResponseHeader("User-Response-Header", "User Service Response")
                         ) //필터 적용
                         .uri("http://localhost:8082") //uri로 이동
                 )
