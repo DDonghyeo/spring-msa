@@ -3,8 +3,8 @@ server:
 
 eureka:
   client:
-    register-with-eureka: false
-    fetch-registry: false
+    register-with-eureka: true
+    fetch-registry: true
     service-url:
       defaultZone: http://localhost:8081/eureka
 spring:
@@ -20,19 +20,19 @@ spring:
             postLogger : true
       routes:
         - id: user-service
-          uri: http://localhost:8082/
+          uri: lb://USER-SERVICE # Load Balancer
           predicates:
             - Path=/user/**
           filters:
-            - AddRequestHeader=User-Request-Header, User Service Request
-            - AddResponseHeader=User-Response-Header, User Service Response
-            - CustomFilter
+#            - AddRequestHeader=User-Request-Header, User Service Request
+#            - AddResponseHeader=User-Response-Header, User Service Response
+            - name : CustomFilter
         - id: app-service
-          uri: http://localhost:8083/
+          uri: lb://APP-SERVICE
           predicates:
             - Path=/app/**
           filters:
-            - AddRequestHeader=App-Request-Header, App Service Request
-            - AddResponseHeader=App-Response-Header, App Service Response
-            - CustomFilter
+#            - AddRequestHeader=App-Request-Header, App Service Request
+#            - AddResponseHeader=App-Response-Header, App Service Response
+            - name : CustomFilter
 

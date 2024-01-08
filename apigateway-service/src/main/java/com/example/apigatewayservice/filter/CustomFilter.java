@@ -48,7 +48,7 @@ public class CustomFilter extends AbstractGatewayFilterFactory<CustomFilter.Conf
 //            ServerHttpRequest request = exchange.getRequest();
 //            ServerHttpResponse response = exchange.getResponse();
 //
-//            log.info("Custom PRE Filter : request id : {}", request.getId());
+//            log.info("Custom PRE Filter : request id : {}", request.getId());ㅁ
 //
 //
 //            //Custom POST Filter
@@ -56,7 +56,7 @@ public class CustomFilter extends AbstractGatewayFilterFactory<CustomFilter.Conf
 //                        log.info("Custom POST Filter : Response Code : {}", response.getStatusCode());
 //                    })
 //            );
-//        }, Ordered.HIGHEST_PRECEDENCE);
+//        }, Ordered.HIGHEST_PRECEDENCE); // filter 우선순위 지정
 //
 //        return gatewayFilter;
 
