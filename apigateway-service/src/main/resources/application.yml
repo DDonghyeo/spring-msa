@@ -6,7 +6,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://localhost:8081/eureka
+      defaultZone: http://localhost:8761/eureka
 spring:
   application:
     name: apigateway-service
@@ -19,14 +19,34 @@ spring:
             preLogger : true
             postLogger : true
       routes:
+        - id: user-service #Login Uri
+          uri: lb://USER-SERVICE # Load Balancer
+          predicates:
+            - Path=/user/login #login의 경우
+            - Method:POST #Method가 POST인 경우
+          filters:
+            - RemoveRequestHeader=Cookie #POST로 전달되는 데이터를 매번 새로운 데이터로 인식하기 위해 Cookie 초기화
+            - RewritePath=/user/(?<segment>.*), /$\{segment} # Rewrite Path
+
         - id: user-service
           uri: lb://USER-SERVICE # Load Balancer
           predicates:
-            - Path=/user/**
+            - Path=/user/create #회원가입
+            - Method:POST #Method가 POST인 경우
           filters:
-#            - AddRequestHeader=User-Request-Header, User Service Request
-#            - AddResponseHeader=User-Response-Header, User Service Response
-            - name : CustomFilter
+            - RemoveRequestHeader=Cookie #POST로 전달되는 데이터를 매번 새로운 데이터로 인식하기 위해 Cookie 초기화
+            - RewritePath=/user/(?<segment>.*), /$\{segment} # Rewrite Path
+
+        - id: user-service
+          uri: lb://USER-SERVICE # Load Balancer
+          predicates:
+            - Path=/user/** #로그인, 회원가입 이외의 요청들
+            - Method:GET
+          filters:
+            - RemoveRequestHeader=Cookie #POST로 전달되는 데이터를 매번 새로운 데이터로 인식하기 위해 Cookie 초기화
+            - RewritePath=/user/(?<segment>.*), /$\{segment} # Rewrite Path
+            - AuthorizationHeaderFilter #인가 정보가 필요한 요청 -> 인가 필터 적용
+
         - id: app-service
           uri: lb://APP-SERVICE
           predicates:
@@ -35,4 +55,8 @@ spring:
 #            - AddRequestHeader=App-Request-Header, App Service Request
 #            - AddResponseHeader=App-Response-Header, App Service Response
             - name : CustomFilter
+  jwt:
+    secret: jwt-secret
+
+
 

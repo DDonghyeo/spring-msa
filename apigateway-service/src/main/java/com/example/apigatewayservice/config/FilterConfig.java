@@ -12,18 +12,20 @@ public class FilterConfig {
 
 //    @Bean
     public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
+
+        CustomFilter customFilter = new CustomFilter();
+
         return builder.routes()
                 .route(r -> r.path("/user/**") //Path 확인
-                        .filters(f -> f.addRequestHeader("User-Request-Header", "User Service Request")
-                                .addResponseHeader("User-Response-Header", "User Service Response")
+                        .filters(f -> f.filter(customFilter.apply(new CustomFilter.Config()))
                         ) //필터 적용
-                        .uri("http://localhost:8082") //uri로 이동
+                        .uri("lb://USER-SERVICE") //uri로 이동
                 )
                 .route(r -> r.path("/app/**")
                         .filters(f -> f.addRequestHeader("App Request Header", "App Service Request")
                                 .addResponseHeader("App Response Header", "App Service Response")
                         ) //필터 적용
-                        .uri("http://localhost:8083")
+                        .uri("lb://APP-SERVICE")
                 )
                 .build();
 
