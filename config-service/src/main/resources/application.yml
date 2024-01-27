@@ -2,10 +2,14 @@ server:
   port: 8888
 
 spring:
+  profiles:
+    active: prod
   application:
     name: config-service
   cloud:
     config:
       server:
         git:
-          uri: file:///Users/kimdonghyun/Desktop/Dong_Hyun/projects/spring-msa/yml
+          uri: https://github.com/DDonghyeo/spring-msa
+          search-paths: yml/**
+          default-label: main
