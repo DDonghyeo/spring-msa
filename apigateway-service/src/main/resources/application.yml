@@ -56,6 +56,10 @@ spring:
 #            - AddResponseHeader=App-Response-Header, App Service Response
             - name : CustomFilter
 
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, httptrace
 
 

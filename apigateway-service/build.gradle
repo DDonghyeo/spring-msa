@@ -36,6 +36,13 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
     implementation 'io.jsonwebtoken:jjwt-impl:0.12.3'
     implementation 'io.jsonwebtoken:jjwt-jackson:0.12.3'
+
+    //Spring Cloud Config Server
+    implementation 'org.springframework.cloud:spring-cloud-config-client:4.0.3'// Eureka Client
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:4.0.3'
+
+    //Spring Boot Actuator
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 }
 
 dependencyManagement {

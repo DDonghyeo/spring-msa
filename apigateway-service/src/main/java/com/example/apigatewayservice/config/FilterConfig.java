@@ -21,6 +21,10 @@ public class FilterConfig {
                         ) //필터 적용
                         .uri("lb://USER-SERVICE") //uri로 이동
                 )
+                .route(r -> r.path("/user/actuator/**") //Actuator Path
+                        .and().method("POST", "GET") //Actuator Method : POST, GET
+                        .uri("lb://USER-SERVICE") //uri로 이동
+                )
                 .route(r -> r.path("/app/**")
                         .filters(f -> f.addRequestHeader("App Request Header", "App Service Request")
                                 .addResponseHeader("App Response Header", "App Service Response")
