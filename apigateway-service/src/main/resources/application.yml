@@ -55,8 +55,7 @@ spring:
 #            - AddRequestHeader=App-Request-Header, App Service Request
 #            - AddResponseHeader=App-Response-Header, App Service Response
             - name : CustomFilter
-  jwt:
-    secret: jwt-secret
+
 
 
 

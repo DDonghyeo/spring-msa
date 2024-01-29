@@ -1,5 +1,27 @@
+server:
+  port: 9000
+
 spring:
   cloud:
     config:
-      uri: http://127.0.0.1:8888
-      name: application-token
+      uri: http://localhost:8888
+      name: token
+
+  application:
+    name: user-service  # micro service unique ID
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    register-with-eureka: true # register to eureka server
+    fetch-registry: true # Getting instances' information from eureka server
+    service-url:
+      defaultZone : http://127.0.0.1:8761/eureka #Eureka Server's address
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh
+

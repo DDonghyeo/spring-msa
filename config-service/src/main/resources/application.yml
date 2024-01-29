@@ -10,6 +10,6 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/DDonghyeo/spring-msa
-          search-paths: yml/**
-          default-label: main
+          uri: https://github.com/DDonghyeo/spring-msa-yml
+#          search-paths: yml/**
+#          default-label: main
