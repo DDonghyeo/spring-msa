@@ -40,6 +40,9 @@ dependencies {
 	//Spring Boot Actuator
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
+	//Spring Cloud Bus AMQP
+	implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
+
 }
 
 dependencyManagement {
