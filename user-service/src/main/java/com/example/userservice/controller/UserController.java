@@ -1,25 +1,24 @@
 package com.example.userservice.controller;
 
+import com.example.userservice.service.UserService;
+import jakarta.ws.rs.QueryParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
-    @Value("${jwt.secret}")
-    private String secret;
+    private final UserService userService;
 
-    @GetMapping("/test")
-
-    public String test() {
-
-        return "token secret : " + secret ;
+    @GetMapping("/user/{user}")
+    public ResponseEntity<?> getUser( @PathVariable String user) {
+        return ResponseEntity.ok(userService.getUser(user));
     }
 
 }

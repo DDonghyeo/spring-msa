@@ -12,7 +12,7 @@ spring:
   cloud:
     config:
       uri: http://localhost:8888
-      name: token
+      name: token, database-user
 
   application:
     name: user-service  # micro service unique ID

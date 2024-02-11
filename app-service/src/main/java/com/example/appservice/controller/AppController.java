@@ -1,15 +1,23 @@
 package com.example.appservice.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.appservice.dto.AppRequestDto;
+import com.example.appservice.service.AppService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/app")
 public class AppController {
 
-    @GetMapping("/test")
-    public String test() {
-        return "App Service Test";
+
+    private final AppService appService;
+
+    @PostMapping("/create")
+    public ResponseEntity<?> createApp(@RequestBody AppRequestDto appRequestDto, @RequestParam("id") String id) {
+        appService.createApp(appRequestDto, id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -23,8 +23,12 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-config-server'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+	//bootstrap
+	implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:4.0.3'
+
 	//Spring Cloud Bus AMQP
 	implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
+
 }
 
 dependencyManagement {
