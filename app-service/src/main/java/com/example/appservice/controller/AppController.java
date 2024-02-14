@@ -16,8 +16,8 @@ public class AppController {
     private final AppService appService;
 
     @PostMapping("/create")
-    public ResponseEntity<?> createApp(@RequestBody AppRequestDto appRequestDto, @RequestParam("id") String id) {
-        appService.createApp(appRequestDto, id);
+    public ResponseEntity<?> createApp(@RequestBody AppRequestDto appRequestDto) {
+        appService.createApp(appRequestDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

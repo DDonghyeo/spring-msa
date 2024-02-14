@@ -29,7 +29,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
@@ -41,6 +40,10 @@ dependencies {
 
     //Webflux
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    //Spring Cloud Config Server
+    implementation 'org.springframework.cloud:spring-cloud-config-client:4.0.3'// Config Client
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:4.0.3'
 }
 
 dependencyManagement {

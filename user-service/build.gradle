@@ -34,7 +34,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	//Spring Cloud Config Server
-	implementation 'org.springframework.cloud:spring-cloud-config-client:4.0.3'// Eureka Client
+	implementation 'org.springframework.cloud:spring-cloud-config-client:4.0.3'// Config Client
 	implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:4.0.3'
 
 	//Spring Boot Actuator

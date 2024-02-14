@@ -1,6 +1,5 @@
 encrypt:
-  # key: awflhieuafwheliuaouthaufhloiwyeay4oe7w # 대칭 키 사용시
   key-store: # 비대칭 키 사용
-    location: file://{user.home}/Desktop/projects #private key의 위치
-    password: test1234
-    alias: apiEncryptionKey
+    location: file:///Users/kimdonghyun/.ssh/jks/privateKey.jks #private key의 위치
+    password: password
+    alias: privateKey

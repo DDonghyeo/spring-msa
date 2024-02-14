@@ -4,6 +4,18 @@ server:
 spring:
   application:
     name: app-service  # micro service unique ID
+  profiles:
+    active: dev
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    config:
+      uri: http://localhost:8888
+      name: token, database-app
+
 
 eureka:
   client:
