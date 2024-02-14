@@ -4,7 +4,9 @@ import com.example.appservice.dto.AppRequestDto;
 import com.example.appservice.dto.UserResponseDto;
 import com.example.appservice.entity.App;
 import com.example.appservice.repository.AppRepository;
+import jakarta.ws.rs.InternalServerErrorException;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.connector.ClientAbortException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -32,9 +34,9 @@ public class AppService {
                 WebClient.create("http://localhost:9000/user/" + appRequestDto.getUserId())
                     .get()
                     .retrieve()
-                    .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> clientResponse.createException())
-                    .onStatus(HttpStatusCode::is5xxServerError, clientResponse -> clientResponse.createException())
-                    .bodyToMono(UserResponseDto.class);리
+                    .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> Mono.error(ClientAbortException::new))
+                    .onStatus(HttpStatusCode::is5xxServerError, clientResponse -> Mono.error(InternalServerErrorException::new))
+                    .bodyToMono(UserResponseDto.class);
 
         userResponseDtoMono.subscribe(userResponseDto -> app.setUserName(userResponseDto.getName()));
 
