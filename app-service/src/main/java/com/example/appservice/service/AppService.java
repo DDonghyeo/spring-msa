@@ -34,20 +34,28 @@ public class AppService {
                     .retrieve()
                     .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> clientResponse.createException())
                     .onStatus(HttpStatusCode::is5xxServerError, clientResponse -> clientResponse.createException())
-                    .bodyToMono(UserResponseDto.class);
+                    .bodyToMono(UserResponseDto.class);리
 
         userResponseDtoMono.subscribe(userResponseDto -> app.setUserName(userResponseDto.getName()));
+
+
+        appRepository.save(app);
+    }
+
+    public void webClientExamples(AppRequestDto appRequestDto) {
+
+        App app = appRequestDto.toEntity();
 
         //단순 create 이용하기 - POST 요청 시
         Mono<UserResponseDto> userResponseDtoMono1 =
                 WebClient.create("http://localhost:9000/user/" + appRequestDto.getUserId())
-                .post()// POST METHOD
-                .body(Mono.just(appRequestDto), AppRequestDto.class)
-                .retrieve()
+                        .post()// POST METHOD
+                        .body(Mono.just(appRequestDto), AppRequestDto.class)
+                        .retrieve()
 //               .bodyToMono(Void.class) // Response 내용 없을 시
-                .bodyToMono(UserResponseDto.class);
+                        .bodyToMono(UserResponseDto.class);
 
-        userResponseDtoMono.subscribe(userResponseDto -> app.setUserName(userResponseDto.getName()));
+        userResponseDtoMono1.subscribe(userResponseDto -> app.setUserName(userResponseDto.getName()));
 
 
         //builder 사용하기
@@ -76,7 +84,5 @@ public class AppService {
                             } else throw new RuntimeException();
 
                         });
-
-        appRepository.save(app);
     }
 }
