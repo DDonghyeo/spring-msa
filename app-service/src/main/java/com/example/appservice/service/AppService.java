@@ -24,6 +24,8 @@ public class AppService {
 
     private final AppRepository appRepository;
 
+    private final KafkaService kafkaService;
+
     private final WebClient webClient;
 
 
@@ -45,6 +47,7 @@ public class AppService {
             app.setUserName(userResponseDto.getName());
         });
 
+        kafkaService.sendMessageUserTopic("userAppCountPlus - " + appRequestDto.getUserId());
 
         appRepository.save(app);
     }

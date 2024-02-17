@@ -15,11 +15,10 @@ spring:
     config:
       uri: http://localhost:8888
       name: token, database-app
-  spring:
-    kafka:
-      bootstrap-servers: "localhost:9092"
-      consumer:
-        group-id: "producerGroupId"
+  kafka:
+    bootstrap-servers: "localhost:9092"
+    consumer:
+      group-id: "MSAGroupId"
 
 
 eureka:
