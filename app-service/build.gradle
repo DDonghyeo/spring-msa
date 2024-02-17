@@ -44,6 +44,9 @@ dependencies {
     //Spring Cloud Config Server
     implementation 'org.springframework.cloud:spring-cloud-config-client:4.0.3'// Config Client
     implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:4.0.3'
+
+    //Kafka
+    implementation 'org.springframework.kafka:spring-kafka'
 }
 
 dependencyManagement {

@@ -6,6 +6,7 @@ import com.example.appservice.entity.App;
 import com.example.appservice.repository.AppRepository;
 import jakarta.ws.rs.InternalServerErrorException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.connector.ClientAbortException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.transaction.interceptor.RollbackRuleAttribute;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class AppService {
@@ -38,7 +40,10 @@ public class AppService {
                     .onStatus(HttpStatusCode::is5xxServerError, clientResponse -> Mono.error(InternalServerErrorException::new))
                     .bodyToMono(UserResponseDto.class);
 
-        userResponseDtoMono.subscribe(userResponseDto -> app.setUserName(userResponseDto.getName()));
+        userResponseDtoMono.subscribe(userResponseDto -> {
+            log.info("User 가져오기 성공 : " + userResponseDto.getId());
+            app.setUserName(userResponseDto.getName());
+        });
 
 
         appRepository.save(app);
